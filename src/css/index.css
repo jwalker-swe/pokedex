@@ -69,7 +69,7 @@ html {
 
 body {
     background-color: var(--identity-color);
-    width: 50%;
+    width: 360px;
     height: 100%;
     margin: 0px auto;
     display: flex;
