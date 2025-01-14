@@ -67,6 +67,12 @@ html {
     overflow: hidden;
 }
 
+@media screen and (max-width: 420px) {
+    html {
+        height: 90vh;
+    }
+}
+
 body {
     background-color: var(--identity-color);
     width: 360px;
@@ -216,6 +222,8 @@ body {
     grid-row-start: 7;
     grid-row-end: span 4;
     border-radius: 10px 10px 10px 10px;
+    box-shadow: 0 0px 10px var(--gs-medium);
+    box-shadow: inset 0 6px 6px white;
 }
 
 .number-container {
