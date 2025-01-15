@@ -1,6 +1,6 @@
 let container = document.querySelector('.gallery-contaienr')
 let gallery = document.querySelector('.gallery')
-gallery.style.overflow = scroll;
+gallery.style.overflow = 'scroll';
 
 
 class PopulateGallery {
