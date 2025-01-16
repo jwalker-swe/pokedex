@@ -1,27 +1,31 @@
-let container = document.querySelector('.gallery-contaienr')
-let gallery = document.querySelector('.gallery')
-gallery.style.overflow = 'scroll';
+let galleryToScroll = document.querySelector('.gallery');
 
-
-class PopulateGallery {
-    constructor(totalCards) {
-        this.totalCards = totalCards;
+class LoadOnScroll {
+    constructor() {
+        this.cardTotal = 0;
+        this.startingCard = 0;
     }
 
-    // Create functions to used to generate cards
+    async getCardTotal() {
+        this.cardTotal = await Number(galleryToScroll.childElementCount);
+        this.startingCard = this.cardTotal + 1;
+        console.log(this.cardTotal);
+    }
 
     async fetchData() {
+        await this.getCardTotal();
+
         let results = [];
         let names = []
 
         // Fetch data to be used for each card
         try {
-            for(let i = 1; i < this.totalCards+1; i++) {
+            for(let i = this.startingCard; i < this.startingCard+3; i++) {
                 const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
                 const data = await response.json();
                 results.push(data);
             }
-            //console.log(results);
+            console.log(results);
             return results;
         } catch (err) {
             console.log(`Error: ${err}`);
@@ -100,7 +104,7 @@ class PopulateGallery {
             backgroundGrid.appendChild(thumbnail);
 
             let img = document.createElement('img');
-            img.src = `src/assets/imgs/sprites/generation-3/pokemon/main-sprites/emerald/${i+1}.png`;
+            img.src = `src/assets/imgs/sprites/generation-3/pokemon/main-sprites/emerald/${i+this.cardTotal+1}.png`;
             thumbnail.appendChild(img);
             
             let nameContainer = document.createElement('div');
@@ -115,15 +119,10 @@ class PopulateGallery {
     }
 }
 
+let getCardsToLoad = new LoadOnScroll();
 
-let generateCards = new PopulateGallery(15);
+let loadCards = function () {
+    getCardsToLoad.createCards();
+};
 
-generateCards.createCards();
-
-
-/* Test indexing through array
-generateCards.fetchData().then(results => {
-    console.log("Accessing results:", results[0].name);
-}).catch(err => {
-    console.log('error');
-}) */
+gallery.addEventListener('click', loadCards);
