@@ -186,7 +186,7 @@ gallery.addEventListener('scroll', throttle(async () => {
     if ((scrollTop + clientHeight) >= scrollHeight - 20) {
         await loadCards();
     }
-}, 80))
+}, 50))
 
 gallery.addEventListener('scroll', () => {
     if (getCardsToLoad.cardTotal > 386) {
