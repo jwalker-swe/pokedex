@@ -10,7 +10,8 @@ class LoadOnScroll {
     async getCardTotal() {
         this.cardTotal = await Number(galleryToScroll.childElementCount);
         this.startingCard = this.cardTotal + 1;
-        console.log(this.cardTotal);
+        console.log(`Cards Loaded: ${this.cardTotal}`);
+        console.log(`Starting Card: ${this.startingCard}`);
     }
 
     async fetchData() {
@@ -18,18 +19,33 @@ class LoadOnScroll {
 
         let results = [];
         let names = []
+        let cardMax = 386;
 
         // Fetch data to be used for each card
-        try {
-            for(let i = this.startingCard; i < this.startingCard+9; i++) {
-                const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
-                const data = await response.json();
-                results.push(data);
+        if (cardMax - this.cardTotal >= 9) {
+            try {
+                for(let i = this.startingCard; i < this.startingCard+9; i++) {
+                    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
+                    const data = await response.json();
+                    results.push(data);
+                }
+                console.log(`Fetched Results: ${results}`);
+                return results;
+            } catch (err) {
+                console.log(`Error: ${err}`);
             }
-            //console.log(results);
-            return results;
-        } catch (err) {
-            console.log(`Error: ${err}`);
+        } else {
+            try {
+                for(let i = this.startingCard; i <= cardMax; i++) {
+                    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
+                    const data = await response.json();
+                    results.push(data);
+                }
+                console.log(`Fetched Results: ${results}`);
+                return results;
+            } catch (err) {
+                console.log(`Error: ${err}`);
+            }
         }
     }
 
@@ -60,6 +76,7 @@ class LoadOnScroll {
 
             listOfIds.push(newId);
         });
+        console.log(`Ids: ${listOfIds}`, `Ids: ${listOfNames}`);
         return [listOfIds, listOfNames];
     }
 
@@ -120,6 +137,15 @@ class LoadOnScroll {
             }
         }
     }
+
+    async removeCard() {
+        if (gallery.childElementCount > 386) {
+            for (let i = 0; i < gallery.childElementCount-386; i++) {
+                let lastCard = gallery.lastElementChild;
+                //await gallery.removeChild(lastCard);
+            }
+        }
+    }
 }
 
 let getCardsToLoad = new LoadOnScroll();
@@ -160,4 +186,11 @@ gallery.addEventListener('scroll', throttle(async () => {
     if ((scrollTop + clientHeight) >= scrollHeight - 20) {
         await loadCards();
     }
-}, 50))
+}, 80))
+
+gallery.addEventListener('scroll', () => {
+    if (getCardsToLoad.cardTotal > 386) {
+        gallery.removeEventListener('scroll', throttle, true);
+        getCardsToLoad.removeCard();
+    }
+});
