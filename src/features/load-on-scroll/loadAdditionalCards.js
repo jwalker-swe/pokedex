@@ -21,7 +21,7 @@ class LoadOnScroll {
 
         // Fetch data to be used for each card
         try {
-            for(let i = this.startingCard; i < this.startingCard+15; i++) {
+            for(let i = this.startingCard; i < this.startingCard+9; i++) {
                 const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
                 const data = await response.json();
                 results.push(data);
@@ -179,6 +179,21 @@ const throttle = (fn, delay) => {
 
 
 gallery.addEventListener('scroll', throttle(async () => {
+    let count = gallery.childElementCount;
+    console.log(count);
+    
+    if (count < 387) {
+        let diff = await getCardsToLoad.calculateDiff();
+        //console.log(diff);
+
+        if (diff <= 50) {
+            await loadCards();
+            await removeClass();
+        }
+    }
+}, 100))
+
+gallery.addEventListener('touchmove', throttle(async () => {
     let count = gallery.childElementCount;
     console.log(count);
     
