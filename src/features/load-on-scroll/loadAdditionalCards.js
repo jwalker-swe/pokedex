@@ -120,35 +120,13 @@ class LoadOnScroll {
             }
         }
     }
-
-    async getLastCardBottom() {
-        let lastCard = await gallery.lastElementChild;
-        lastCard.classList.add('lastCard');
-        let lastCardPos = await lastCard.getBoundingClientRect();
-        let lastCardBottom = await lastCardPos.bottom;
-        return lastCardBottom;
-    }
-
-    async getGalleryContainerBottom() {
-        let galleryContainerPos = await galleryContainer.getBoundingClientRect();
-        let galleryContainerBottom = galleryContainerPos.bottom;
-        return galleryContainerBottom;
-    }
-
-    async calculateDiff() {
-        let cardBottom = await this.getLastCardBottom();
-        let galleryBottom = await this.getGalleryContainerBottom();
-
-        return cardBottom - galleryBottom;
-    }
-
-    async removeLastCardClass() {
-        let lastCard = gallery.lastElementChild;
-        await lastCard.classList.remove('.lastCard');
-    }
 }
 
 let getCardsToLoad = new LoadOnScroll();
+
+
+
+
 
 
 
@@ -157,10 +135,8 @@ let loadCards = async function () {
     await getCardsToLoad.createCards();
 };
 
-let removeClass = async function () {
-    await getCardsToLoad.removeLastCardClass();
-}
 
+//Create throttle function to delay load on scroll
 const throttle = (fn, delay) => {
     let time = Date.now();
 
@@ -179,31 +155,9 @@ const throttle = (fn, delay) => {
 
 
 gallery.addEventListener('scroll', throttle(async () => {
-    let count = gallery.childElementCount;
-    console.log(count);
+    const { scrollTop, scrollHeight, clientHeight } = gallery;
     
-    if (count < 387) {
-        let diff = await getCardsToLoad.calculateDiff();
-        //console.log(diff);
-
-        if (diff <= 50) {
-            await loadCards();
-            await removeClass();
-        }
+    if ((scrollTop + clientHeight) >= scrollHeight - 20) {
+        await loadCards();
     }
-}, 100))
-
-gallery.addEventListener('touchmove', throttle(async () => {
-    let count = gallery.childElementCount;
-    console.log(count);
-    
-    if (count < 387) {
-        let diff = await getCardsToLoad.calculateDiff();
-        //console.log(diff);
-
-        if (diff <= 50) {
-            await loadCards();
-            await removeClass();
-        }
-    }
-}, 100))
+}, 50))
