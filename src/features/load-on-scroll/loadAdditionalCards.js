@@ -5,6 +5,8 @@ class LoadOnScroll {
     constructor() {
         this.cardTotal = 0;
         this.startingCard = 0;
+        this.currentPokemon;
+        this.previousPokemon;
     }
 
     async getCardTotal() {
@@ -22,9 +24,9 @@ class LoadOnScroll {
         let cardMax = 386;
 
         // Fetch data to be used for each card
-        if (cardMax - this.cardTotal >= 9) {
+        if (cardMax - this.cardTotal >= 15) {
             try {
-                for(let i = this.startingCard; i < this.startingCard+9; i++) {
+                for(let i = this.startingCard; i < this.startingCard+15; i++) {
                     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
                     const data = await response.json();
                     results.push(data);
@@ -57,6 +59,10 @@ class LoadOnScroll {
         let pokemon = await this.fetchData();
         //console.log(pokemon);
 
+        // Set currentPokemon
+        this.currentPokemon = pokemon;
+        console.log(`Current Pokemon: ${this.currentPokemon}`)
+
         pokemon.forEach(element => {
             listOfNames.push(element.name);
 
@@ -83,57 +89,64 @@ class LoadOnScroll {
     async createCards() {
         if (this.cardTotal < 387) {
             let listOfPokemon = await this.returnPokemon();
-            let listOfIds = listOfPokemon[0];
-            let listOfNames = listOfPokemon[1];
+            if (this.currentPokemon != this.previousPokemon) {
+                let listOfIds = listOfPokemon[0];
+                let listOfNames = listOfPokemon[1];
 
-            //console.log('List of Pokemon and their data:', listOfPokemon);
-            //console.log('List of Pokemon Ids:', listOfIds);
-            //console.log('List of Pokemon Names:', listOfNames);
+                //console.log('List of Pokemon and their data:', listOfPokemon);
+                //console.log('List of Pokemon Ids:', listOfIds);
+                //console.log('List of Pokemon Names:', listOfNames);
 
-            for (let i = 0; i < listOfPokemon[0].length; i++) {
-                //console.log(`Pokemon name: ${listOfNames[i]}`, '/', `Pokemon ids: ${listOfIds[i]}`)
+                for (let i = 0; i < listOfPokemon[0].length; i++) {
+                    //console.log(`Pokemon name: ${listOfNames[i]}`, '/', `Pokemon ids: ${listOfIds[i]}`)
 
-                let pokemonCard = document.createElement('article');
-                pokemonCard.classList.add('pokemon-card');
-                gallery.appendChild(pokemonCard);
+                    let pokemonCard = document.createElement('article');
+                    pokemonCard.classList.add('pokemon-card');
+                    pokemonCard.id = `${listOfIds[i]}`;
+                    gallery.appendChild(pokemonCard);
 
-                let backgroundGrid = document.createElement('div');
-                backgroundGrid.classList.add('background-grid');
-                pokemonCard.appendChild(backgroundGrid);
+                    let backgroundGrid = document.createElement('div');
+                    backgroundGrid.classList.add('background-grid');
+                    pokemonCard.appendChild(backgroundGrid);
 
-                let cardBackground001 = document.createElement('div');
-                cardBackground001.classList.add('card-background-001');
-                backgroundGrid.appendChild(cardBackground001);
+                    let cardBackground001 = document.createElement('div');
+                    cardBackground001.classList.add('card-background-001');
+                    backgroundGrid.appendChild(cardBackground001);
 
-                let cardBackground002 = document.createElement('div');
-                cardBackground002.classList.add('card-background-002');
-                backgroundGrid.appendChild(cardBackground002);
+                    let cardBackground002 = document.createElement('div');
+                    cardBackground002.classList.add('card-background-002');
+                    backgroundGrid.appendChild(cardBackground002);
 
-                let numberContainer = document.createElement('div');
-                numberContainer.classList.add('number-container');
-                backgroundGrid.appendChild(numberContainer);
+                    let numberContainer = document.createElement('div');
+                    numberContainer.classList.add('number-container');
+                    backgroundGrid.appendChild(numberContainer);
 
-                let num = document.createElement('p');
-                num.classList.add('num');
-                num.innerHTML = `${listOfIds[i]}`;
-                numberContainer.appendChild(num);
+                    let num = document.createElement('p');
+                    num.classList.add('num');
+                    num.innerHTML = `${listOfIds[i]}`;
+                    numberContainer.appendChild(num);
 
-                let thumbnail = document.createElement('div');
-                thumbnail.classList.add('thumbnail');
-                backgroundGrid.appendChild(thumbnail);
+                    let thumbnail = document.createElement('div');
+                    thumbnail.classList.add('thumbnail');
+                    backgroundGrid.appendChild(thumbnail);
 
-                let img = document.createElement('img');
-                img.src = `src/assets/imgs/sprites/generation-3/pokemon/main-sprites/emerald/${i+this.cardTotal+1}.png`;
-                thumbnail.appendChild(img);
-                
-                let nameContainer = document.createElement('div');
-                nameContainer.classList.add('name-container');
-                backgroundGrid.appendChild(nameContainer);
+                    let img = document.createElement('img');
+                    img.src = `src/assets/imgs/sprites/generation-3/pokemon/main-sprites/emerald/${i+this.cardTotal+1}.png`;
+                    thumbnail.appendChild(img);
+                    
+                    let nameContainer = document.createElement('div');
+                    nameContainer.classList.add('name-container');
+                    backgroundGrid.appendChild(nameContainer);
 
-                let name = document.createElement('h6');
-                name.classList.add('name');
-                name.innerHTML = `${listOfNames[i]}`;
-                nameContainer.appendChild(name);
+                    let name = document.createElement('h6');
+                    name.classList.add('name');
+                    name.innerHTML = `${listOfNames[i]}`;
+                    nameContainer.appendChild(name);
+                  
+                    this.previousPokemon = this.currentPokemon;
+                }
+            } else {
+                console.log(`Loaded the same pokemon`);
             }
         }
     }
@@ -178,15 +191,15 @@ const throttle = (fn, delay) => {
 
 
 
-
-
-gallery.addEventListener('scroll', throttle(async () => {
-    const { scrollTop, scrollHeight, clientHeight } = gallery;
-    
-    if ((scrollTop + clientHeight) >= scrollHeight - 20) {
-        await loadCards();
+function handleEvent() {
+    if (gallery.offsetHeight + gallery.scrollTop >= gallery.scrollHeight - 20) {
+        loadCards();
     }
-}, 50))
+}
+
+gallery.addEventListener('scroll', throttle(handleEvent, 100));
+
+
 
 gallery.addEventListener('scroll', () => {
     if (getCardsToLoad.cardTotal > 386) {

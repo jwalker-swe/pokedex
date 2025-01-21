@@ -72,6 +72,7 @@ class PopulateGallery {
 
             let pokemonCard = document.createElement('article');
             pokemonCard.classList.add('pokemon-card');
+            pokemonCard.id = `${listOfIds[i]}`;
             gallery.appendChild(pokemonCard);
 
             let backgroundGrid = document.createElement('div');
@@ -116,8 +117,10 @@ class PopulateGallery {
 }
 
 
-let generateCards = new PopulateGallery(15);
+let generateCards = new PopulateGallery(12);
+let currentPage = 1;
 
+document.querySelector('.bi-arrow-left').style.opacity = '0';
 generateCards.createCards();
 
 

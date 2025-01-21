@@ -279,3 +279,50 @@ body {
     margin: 5px 0 5px 0;
     font-weight: 400;
 }
+
+.footer-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-nav {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-number-list {
+    width: 33%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-number {
+    list-style: none;
+}
+
+
+.prev-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.prev-page-container:hover {
+    cursor: pointer;
+}
+
+.next-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.next-page-container:hover {
+    cursor: pointer;
+}
+
