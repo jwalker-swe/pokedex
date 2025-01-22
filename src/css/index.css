@@ -295,7 +295,7 @@ body {
 }
 
 .page-number-list {
-    width: 33%;
+    width: 50%;
     display: flex;
     justify-content: space-between;
     align-items: center;
