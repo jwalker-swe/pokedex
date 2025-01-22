@@ -65,6 +65,8 @@ class CreatePageNumbers{
         //Reset list of iterators
         this._listOfIterators = [[],[],[],[],[],[],[],[],[],[],[]];
         this.pushToIterators();
+        console.log('Total Pages: ', this._totalPages);
+        console.log('Current Page: ', this._currentPage);
         
         //Determine which iterator to load
         this._listOfIterators.forEach(iterator => {
@@ -106,15 +108,46 @@ class CreatePageNumbers{
     nextPage() {
         this.removePages();
         this._currentPage++;
+        currentPage++;
         this.genPages();
+
+        if (this._currentPage === this._totalPages) {
+            nextPageArrow.style.display = 'none';
+        }
+
+        if (this._currentPage !== 1) {
+            prevPageArrow.style.display = 'block';
+        }
     }
 
+    prevPage() {
+        this.removePages();
+        this._currentPage--;
+        currentPage--;
+        this.genPages();
+
+        if (this._currentPage === 1) {
+            prevPageArrow.style.display = 'none';
+        }
+
+        if (this._currentPage !== this._totalPages) {
+            nextPageArrow.style.display = 'block';
+        }
+    }
 }
 
 
 // Load initial pages
 const generatePageNumbers = new CreatePageNumbers(386, 1);
-generatePageNumbers.genPages();
+
+const initialLoad = function() {
+    prevPageArrow.style.display = 'none';
+    generatePageNumbers.genPages();
+}
+window.addEventListener('load', initialLoad);
+
+
+
 
 
 // Go to next page
@@ -127,46 +160,9 @@ nextPageButton.addEventListener('click', genNextPage);
 
 
 
+// Go to prev page
+const genPrevPage = function() {
+    generatePageNumbers.prevPage();
+}
+prevPageButton.addEventListener('click', genPrevPage);
 
-
-
-
-
-
-
-
-
-
-
-
-
-// this._listOfIterators.forEach(iterator => {
-//     iterator.push(this._pageList.splice(0, 3));
-// });
-
-// //console.log('Length of iterator list: ', this._listOfIterators.length);
-
-// //Find which iterator to load based on currentPage value
-// for (let i = 0; i < this._listOfIterators.length; i++) {
-//     this._listOfIterators[i].forEach(iteratorPages => {
-//         iteratorPages.forEach(page => {
-//             if (currentPage.toString() === page.toString()) {
-//                 this._currentIterator = i;
-//                 console.log(this._currentIterator);
-//             }
-//         });
-//     });
-// }
-
-
-
-
-
-// this._listOfIterators[this._currentIterator].forEach(iterator => {
-//     iterator.forEach(page => {
-//         let pageNum = document.createElement('li');
-//         pageNum.classList.add('page-number');
-//         pageNum.innerHTML = `${page}`;
-//         pageNumberList.appendChild(pageNum);
-//     });
-// });
