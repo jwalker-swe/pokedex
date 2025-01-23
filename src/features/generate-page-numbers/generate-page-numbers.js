@@ -1,11 +1,17 @@
 let currentPage;
 let loadCount;
 
-window.addEventListener('load', () => {
+const setPage = function() {
     currentPage = 1;
     loadCount++;
     return currentPage;
-})
+}
+
+setPage();
+
+// window.addEventListener('load', setPage);
+
+console.log(currentPage);
 
 const totalPokemon = 386;
 const maxPerPage = 12;
@@ -65,8 +71,8 @@ class CreatePageNumbers{
         //Reset list of iterators
         this._listOfIterators = [[],[],[],[],[],[],[],[],[],[],[]];
         this.pushToIterators();
-        console.log('Total Pages: ', this._totalPages);
-        console.log('Current Page: ', this._currentPage);
+        // console.log('Total Pages: ', this._totalPages);
+        // console.log('Current Page: ', this._currentPage);
         
         //Determine which iterator to load
         this._listOfIterators.forEach(iterator => {
@@ -84,8 +90,10 @@ class CreatePageNumbers{
 
                             if (num.toString() === this._currentPage.toString()) {
                                 pageNum.style.opacity = '1';
+                                pageNum.classList.add('current-page');
                             } else {
                                 pageNum.style.opacity = '0.5';
+                                pageNum.classList.remove('.current-page');
                             }
                         });
 
@@ -118,6 +126,8 @@ class CreatePageNumbers{
         if (this._currentPage !== 1) {
             prevPageArrow.style.display = 'block';
         }
+
+        return currentPage;
     }
 
     prevPage() {
@@ -133,6 +143,8 @@ class CreatePageNumbers{
         if (this._currentPage !== this._totalPages) {
             nextPageArrow.style.display = 'block';
         }
+
+        return currentPage;
     }
 }
 
@@ -165,4 +177,6 @@ const genPrevPage = function() {
     generatePageNumbers.prevPage();
 }
 prevPageButton.addEventListener('click', genPrevPage);
+
+
 
