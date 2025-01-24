@@ -180,7 +180,6 @@ pokedex.createCards();
 
 let nextPage = async function () {
 
-    console.log(currentPage);
     pokedex.removeCards(currentPage);
     pokedex = new Pokedex(currentPage);
     pokedex.createCards();
@@ -189,7 +188,6 @@ let nextPage = async function () {
 
 let prevPage = async function () {
 
-    console.log(currentPage);
     pokedex.removeCards(currentPage);
     pokedex = new Pokedex(currentPage);
     pokedex.createCards();
