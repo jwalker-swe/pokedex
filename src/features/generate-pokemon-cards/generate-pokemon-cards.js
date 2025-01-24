@@ -1,11 +1,17 @@
 // Create global variables for DOM elements
 let container = document.querySelector('.gallery-contaienr')
 let gallery = document.querySelector('.gallery')
+let activePage = document.querySelector('.current-page');
+
+
+console.log(activePage);
 
 
 // Create array of pokemon to fetch
-class LoadCards{
+class Pokedex{
+
     constructor(currentPageNum) {
+
         this._totalPokemon = 386;
         this._currentPage = currentPageNum;
         this._perPage = 12;
@@ -18,24 +24,32 @@ class LoadCards{
         this._results = [];
         this._listOfIds = [];
         this._listOfNames = [];
+
     }
 
     getIds() {
+        //this._ids = [];
+
         for(let i = 1; i <= this._totalPokemon; i++) {
             this._ids.push(i);
         }
+        
         return this._ids;
+
     }
 
     seperateIds() {
+
         this.getIds();
+        
 
         for(let i = 1; i <= this._totalPages; i++) {
            this._idsPerPage.push([this._ids.splice(0, this._perPage)]);
         }
 
-        console.log('Ids: ', this._idsPerPage);
+        // console.log('Ids: ', this._idsPerPage);
         return this._idsPerPage;
+        
     }
 
     async fetchData(offset) {
@@ -93,13 +107,13 @@ class LoadCards{
         let listOfIds = listOfPokemon[0];
         let listOfNames = listOfPokemon[1];
 
-        console.log(listOfIds);
-        console.log(listOfNames);
-        console.log(this._listOfIds);
+        // console.log(listOfIds);
+        // console.log(listOfNames);
+        // console.log(this._listOfIds);
 
         for (const [index, id] of this._listOfIds.entries()) {
 
-            console.log(listOfIds[index]);
+            // console.log(listOfIds[index]);
 
             let pokemonCard = document.createElement('article');
             pokemonCard.classList.add('pokemon-card');
@@ -146,16 +160,32 @@ class LoadCards{
 
         }
     }
+
+    removeCards() {
+        let child = gallery.lastElementChild;
+        for (let i = 1; i <= gallery.childElementCount; i++) {
+            while(child) {
+                gallery.removeChild(child);
+                child = gallery.lastElementChild;
+            }
+        }
+    }
 }
 
-let populateCards = new LoadCards(currentPage);
+let pokedex = new Pokedex(currentPage);
 
 
-populateCards.createCards();
+pokedex.createCards();
 
 
-let nextPage = function () {
-    currentPage++;
+let nextPage = async function () {
 
-    populateCards.createCards();
+    console.log(currentPage);
+    pokedex.removeCards(currentPage);
+    pokedex = new Pokedex(currentPage);
+    pokedex.createCards();
+
 }
+
+
+nextPageButton.addEventListener('click', nextPage);
