@@ -3,9 +3,7 @@ let container = document.querySelector('.gallery-contaienr')
 let gallery = document.querySelector('.gallery')
 let activePage = document.querySelector('.current-page');
 
-
-console.log(activePage);
-
+let wrapper = document.querySelector('.gallery');
 
 // Create array of pokemon to fetch
 class Pokedex{
@@ -47,18 +45,14 @@ class Pokedex{
            this._idsPerPage.push([this._ids.splice(0, this._perPage)]);
         }
 
-        // console.log('Ids: ', this._idsPerPage);
         return this._idsPerPage;
         
     }
 
-    async fetchData(offset) {
-
-        this.seperateIds();
+    async fetchData(offset, idArray) {
 
         // Fetch data to store in results
-        this._pageToLoad = this._idsPerPage[this._currentPage - offset];
-        console.log('Current page to Load: ', this._pageToLoad);
+        this._pageToLoad = idArray[this._currentPage - offset];
 
         for (const page of this._pageToLoad) {
             for (const i of page) {
@@ -71,15 +65,18 @@ class Pokedex{
 
     }
 
-    async isolateInfo() {
+    async isolateInfo(offset, idArray) {
 
         let newId;
         let listOfNames = [];
         let listOfIds = [];
-        await this.fetchData(1);
+        await this.fetchData(offset, idArray);
 
-        this._results.forEach(pokemon => {
+        this._results.forEach(async pokemon => {
             listOfNames.push(pokemon.name);
+        })
+
+        this._results.forEach(async pokemon => {
             this._listOfIds.push(pokemon.id);
 
             let id = pokemon.id.toString();
@@ -98,27 +95,28 @@ class Pokedex{
 
             listOfIds.push(newId);
         });
+
         return [listOfIds, listOfNames];
     }
 
-    async createCards() {
+    async createCards(offset, idArray) {
 
-        let listOfPokemon = await this.isolateInfo();
+        let listOfPokemon = await this.isolateInfo(offset, idArray);
         let listOfIds = listOfPokemon[0];
         let listOfNames = listOfPokemon[1];
 
-        // console.log(listOfIds);
-        // console.log(listOfNames);
-        // console.log(this._listOfIds);
 
         for (const [index, id] of this._listOfIds.entries()) {
 
-            // console.log(listOfIds[index]);
+            let pokemonButton = document.createElement('button');
+            pokemonButton.classList.add('pokemonButton');
+            pokemonButton.id = `button-${listOfIds[index]}`;
+            gallery.appendChild(pokemonButton);
 
             let pokemonCard = document.createElement('article');
             pokemonCard.classList.add('pokemon-card');
             pokemonCard.id = `${listOfIds[index]}`;
-            gallery.appendChild(pokemonCard);
+            pokemonButton.appendChild(pokemonCard);
 
             let backgroundGrid = document.createElement('div');
             backgroundGrid.classList.add('background-grid');
@@ -174,26 +172,41 @@ class Pokedex{
 
 let pokedex = new Pokedex(currentPage);
 
+pokedex.seperateIds();
+let allIds = pokedex.seperateIds();
 
-pokedex.createCards();
+pokedex.createCards(1, allIds);
 
 
 let nextPage = async function () {
 
     pokedex.removeCards(currentPage);
-    pokedex = new Pokedex(currentPage);
-    pokedex.createCards();
+    pokedex = await new Pokedex(currentPage);
+    await pokedex.createCards(1, allIds);
 
 }
 
 let prevPage = async function () {
 
     pokedex.removeCards(currentPage);
-    pokedex = new Pokedex(currentPage);
-    pokedex.createCards();
+    pokedex = await new Pokedex(currentPage);
+    await pokedex.createCards(1, allIds);
 
 }
 
+function throttle(func, limit) {
+    let inThrottle;
+    return function() {
+        const context = this;
+        const args = arguments;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    }
+}
 
-nextPageButton.addEventListener('click', nextPage);
-prevPageButton.addEventListener('click', prevPage);
+
+nextPageButton.addEventListener('click', throttle(nextPage, 800));
+prevPageButton.addEventListener('click', throttle(prevPage, 800));

@@ -193,19 +193,28 @@ body {
     display: none;
 }
 
+.pokemonButton {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 0px;
+    transition: 0.1s ease-in-out;
+}
+
+.pokemonButton:hover {
+    cursor: pointer;
+    scale: 1.1;
+    transition: 0.1s ease-in-out;
+    box-shadow: 0 0 10px var(--gs-medium);
+}
+
 .pokemon-card {
     width: 100%;
     height: 100%;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 0 var(--dropShadow) var(--gs-medium);
-}
-
-.pokemon-card:hover {
-    cursor: pointer;
-    scale: 1.1;
-    transition: 0.1s ease-in-out;
-    box-shadow: 0 0 10px var(--gs-medium);
 }
 
 .background-grid {

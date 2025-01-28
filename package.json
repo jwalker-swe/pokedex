@@ -1,5 +1,23 @@
 {
   "dependencies": {
     "bootstrap-icons": "^1.11.3"
-  }
+  },
+  "name": "pokedex",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PRISM-EXE/pokedex.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PRISM-EXE/pokedex/issues"
+  },
+  "homepage": "https://github.com/PRISM-EXE/pokedex#readme",
+  "description": ""
 }

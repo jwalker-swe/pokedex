@@ -9,7 +9,6 @@ const setPage = function() {
 
 setPage();
 
-// window.addEventListener('load', setPage);
 
 console.log(currentPage);
 
@@ -71,8 +70,6 @@ class CreatePageNumbers{
         //Reset list of iterators
         this._listOfIterators = [[],[],[],[],[],[],[],[],[],[],[]];
         this.pushToIterators();
-        // console.log('Total Pages: ', this._totalPages);
-        // console.log('Current Page: ', this._currentPage);
         
         //Determine which iterator to load
         this._listOfIterators.forEach(iterator => {
@@ -160,15 +157,27 @@ window.addEventListener('load', initialLoad);
 
 
 
+// Set up throttling for event handlers
+function throttle(func, limit) {
+    let inThrottle;
+    return function() {
+        const context = this;
+        const args = arguments;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    }
+}
+
 
 
 // Go to next page
 const genNextPage = function() {
     generatePageNumbers.nextPage();
 }
-nextPageButton.addEventListener('click', genNextPage);
-
-
+nextPageButton.addEventListener('click', throttle(genNextPage, 800));
 
 
 
@@ -176,7 +185,7 @@ nextPageButton.addEventListener('click', genNextPage);
 const genPrevPage = function() {
     generatePageNumbers.prevPage();
 }
-prevPageButton.addEventListener('click', genPrevPage);
+prevPageButton.addEventListener('click', throttle(genPrevPage, 800));
 
 
 
