@@ -345,3 +345,69 @@ body {
     height: auto;
 }
 
+
+
+/* Setup stats page css */
+.back-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.back-button-text {
+    margin: 10px 5px;
+}
+
+.pokemonStatCard {
+    width: 100%;
+    height: 100%;
+
+    border-radius:15px;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 33.34%);
+
+    background-color: white;
+    color: var(white);
+
+    overflow: hidden;
+}
+
+.back-link {
+    text-decoration: none;
+    color: var(--gs-background)
+}
+
+.upper {
+    width: 100%;
+    height: 100%;
+
+    grid-column-start: 1;
+    grid-row-start: 1;
+    grid-row-end: span 1;
+
+    background-color: var(--gs-light);
+
+}
+
+.lower {
+    grid-column-start: 1;
+    grid-row-start: 2;
+    grid-row-end: span 2;
+
+    background-color: var(--gs-light);
+}
+
+.lowerInterior {
+    width: 352px;
+    height: 343.1px;
+
+    box-sizing: content-box;
+
+    margin: 0px auto;
+
+    border-radius: 15px;
+
+    background-color: white;
+}
