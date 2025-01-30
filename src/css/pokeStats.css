@@ -130,6 +130,8 @@ body {
     color: var(--gs-background);
     cursor: pointer;
 
+    margin: 10px 0px;
+
     z-index: 10000;
 }
 

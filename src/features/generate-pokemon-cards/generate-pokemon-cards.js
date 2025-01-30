@@ -107,15 +107,15 @@ class Pokedex{
 
 
         for (const [index, id] of this._listOfIds.entries()) {
-            let pokemonLink = document.createElement('a');
-            pokemonLink.classList.add('link-to-stats');
-            pokemonLink.href = '/src/pages/poke-stats.html';
-            gallery.appendChild(pokemonLink);
+            // let pokemonLink = document.createElement('a');
+            // pokemonLink.classList.add('link-to-stats');
+            // pokemonLink.href = '/src/pages/poke-stats.html';
+            // gallery.appendChild(pokemonLink);
 
             let pokemonButton = document.createElement('button');
             pokemonButton.classList.add('pokemonButton');
             pokemonButton.id = `button-${listOfIds[index]}`;
-            pokemonLink.appendChild(pokemonButton);
+            gallery.appendChild(pokemonButton);
 
             let pokemonCard = document.createElement('article');
             pokemonCard.classList.add('pokemon-card');

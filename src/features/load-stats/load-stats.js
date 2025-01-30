@@ -57,8 +57,8 @@ let Stats = class {
 let getStats = new Stats;
 
 
-
 // Event listener to get which button is clicked
+
 
 gallery.addEventListener('click', async function(event) {
     let target = event.target;
@@ -73,19 +73,17 @@ gallery.addEventListener('click', async function(event) {
     await getStats.getData(buttonPressed);
     let results = await getStats._results;
 
-    let pokemonName = results.name;
-    let pokemonId = results.id;
-    let pokemonAbilities = results.abilities;
-    let pokemonWeight = results.weight;
-    let pokemonHeight = results.height;
-    let pokemonStats = results.stats;
-    let pokemonTypes = results.types;
+    await localStorage.setItem('pokemonName', results.name);
+    await localStorage.setItem('pokemonId', results.id);
+    await localStorage.setItem('pokemonAbilities', results.abilities);
+    await localStorage.setItem('pokemonWeight', results.weight);
+    await localStorage.setItem('pokemonHeight', results.height);
+    await localStorage.setItem('pokemonStats', results.stats);
+    await localStorage.setItem('pokemonTypes', results.types);
 
-    console.log(pokemonName);
-
-    pokemon = [pokemonId, pokemonAbilities, pokemonWeight, pokemonHeight, pokemonStats, pokemonStats];
+    setTimeout(() => {
+        window.location.href='./src/pages/poke-stats.html';
+    }, 10);
 
     return pokemon;
 })
-
-export const pokemonInfo = pokemon;
