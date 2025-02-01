@@ -1,7 +1,7 @@
 let path;
 
 // Get pokemon stat values
-let name = localStorage.getItem('pokemonName');
+let nameValue = localStorage.getItem('pokemonName');
 let id = localStorage.getItem('pokemonId');
 let types = localStorage.getItem('pokemonTypes');
 let typesParsed = JSON.parse(types);
@@ -19,6 +19,7 @@ let spd = localStorage.getItem('pokemonSpd');
 
 
 // Get html elements
+let nameContainer = document.querySelector('.pokemon-name');
 let thumbnail = document.querySelector('.poke-img');
 let type001 = document.querySelector('#type-001');
 let type002 = document.querySelector('#type-002');
@@ -60,25 +61,33 @@ getImage();
 // Assign elements the correct value
 mainContainer.style.backgroundColor = `var(--${typesParsed[0].toLowerCase()})`
 
+nameContainer.innerHTML = `${nameValue.toUpperCase()}`
+
 weightContainer.innerHTML = `${Number(weight) * 0.1}` + 'kg';
 heightContainer.innerHTML = `${(Number(height) * 0.1).toFixed(1)}` + 'm';
 
-hpBar.style.width = `${hp}%`;
+hpBar.style.width = `clamp(0%, ${hp}%, 100%)`;
+hpBar.style.backgroundColor = `var(--${typesParsed[0].toLowerCase()})`
 hpValue.innerHTML = `${hp}`;
 
-atkBar.style.width = `${atk}%`;
+atkBar.style.width = `clamp(0%, ${atk}%, 100%)`;
+atkBar.style.backgroundColor = `var(--${typesParsed[0].toLowerCase()})`
 atkValue.innerHTML = `${atk}`;
 
-defBar.style.width = `${def}%`;
+defBar.style.width = `clamp(0%, ${def}%, 100%)`;
+defBar.style.backgroundColor = `var(--${typesParsed[0].toLowerCase()})`
 defValue.innerHTML = `${def}`;
 
-satkBar.style.width = `${satk}%`;
+satkBar.style.width = `clamp(0%, ${satk}%, 100%)`;
+satkBar.style.backgroundColor = `var(--${typesParsed[0].toLowerCase()})`
 satkValue.innerHTML = `${satk}`;
 
-sdefBar.style.width = `${sdef}%`;
+sdefBar.style.width = `clamp(0%, ${sdef}%, 100%)`;
+sdefBar.style.backgroundColor = `var(--${typesParsed[0].toLowerCase()})`
 sdefValue.innerHTML = `${sdef}`;
 
-spdBar.style.width = `${spd}%`;
+spdBar.style.width = `clamp(0%, ${spd}%, 100%)`;
+spdBar.style.backgroundColor = `var(--${typesParsed[0].toLowerCase()})`
 spdValue.innerHTML = `${spd}`;
 
 

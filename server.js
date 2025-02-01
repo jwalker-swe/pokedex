@@ -6,6 +6,7 @@ let id;
 
 const js = '/src/features/';
 
+app.set("view engin", "ejs");
 app.use(express.static('public'));
 
 app.get('/', (request, response) => {
@@ -49,7 +50,7 @@ app.get(`/src/pages/poke-stats/:pokemonId`, (request, response) => {
     let pokemonId = request.params.pokemonId;
     console.log('Server Pokemon Id: ', pokemonId);
     let imgPath = {
-        path: `/assets/imgs/sprites/generation-3/emerald/${pokemonId}.png`
+        path: `/assets/imgs/sprites/generation-3/pokemon/main-sprites/emerald/${pokemonId}.png`
     }
     response.json(imgPath);
 })
