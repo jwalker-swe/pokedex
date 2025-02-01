@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
      <!-- Import fonts -->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Press+Start+2P&display=swap" rel="stylesheet">
-     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_back,straighten,weight" />
+     <link type="text/css" rel="preconnect" href="https://fonts.googleapis.com">
+     <link type="text/css" rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link type="text/css" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Press+Start+2P&display=swap" rel="stylesheet">
+     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_back,straighten,weight" />
 
      <!-- Link to CSS -->
-      <link rel="stylesheet" href="/src/css/pokeStats.css">
+      <link type="text/css" rel="stylesheet" href="/src/css/pokeStats.css">
 
     <title>Pokédex</title>
 </head>
@@ -19,11 +19,11 @@
 <body>
     <header class="header-container">
         <section class="logo-container">
-            <img class="logo-header" src="/src/assets/imgs/logos/pokedex-header-logo-001.png">
+            <img class="logo-header" src="/assets/imgs/logos/pokedex-header-logo-001.png">
             <h1 class="title">Pokédex</h1>
         </section>
         <nav class="nav-header-container">
-            <a class="back-link" href="/index.html">
+            <a class="back-link" href="/">
                 <div class="back-button-container">
                     <div class="material-symbols-outlined">
                         arrow_back
@@ -35,10 +35,10 @@
     </header>
     <main class="main-container">
         <div class="bg-img-container">
-            <img class="bg-logo" src="/src/assets/imgs/logos/pokedex-header-logo-001.png">
+            <img class="bg-logo" src="/assets/imgs/logos/pokedex-header-logo-001.png">
         </div>
         <div class="pokemon-img-container">
-            <img class="poke-img" src="/src/assets/imgs/sprites/generation-3/pokemon/main-sprites/emerald/1.png">
+            <img class="poke-img" src="/assets/imgs/sprites/generation-3/pokemon/main-sprites/emerald/1.png">
         </div>
         <div class="info-container">
             <div class="types">
@@ -64,15 +64,15 @@
                 <section class="trait" id="moves">
                     <div class="trait-container" id="moves-container">
                         <ul class="moves-list">
-                            <li class="move-name">Overgrow</li>
-                            <li class="move-name">Chlorophyll</li>
+                            <li class="move-name" id="move-001">Overgrow</li>
+                            <li class="move-name" id="move-002">Chlorophyll</li>
                         </ul>
                     </div>
                     <span class="trait-heading">Moves</span>
                 </section>
             </div>
-            <div class="description">
-                <p>For some time after its birth, it uses the nutrients that are packed into the seed on its back in order to grow.</p>
+            <div class="sound-container">
+                
             </div>
             <h2 class="heading" id="base-stats-heading">Base Stats</h2>
             <div class="stat-bar-container">
@@ -85,12 +85,12 @@
                     <span class="stat-name" id="spd">SPD</span>
                 </div>
                 <div class="stat-values">
-                    <span class="stat-value">999</span>
-                    <span class="stat-value">999</span>
-                    <span class="stat-value">999</span>
-                    <span class="stat-value">999</span>
-                    <span class="stat-value">999</span>
-                    <span class="stat-value">999</span>
+                    <span class="stat-value" id="hp-value">999</span>
+                    <span class="stat-value" id="atk-value">999</span>
+                    <span class="stat-value" id="def-value">999</span>
+                    <span class="stat-value" id="satk-value">999</span>
+                    <span class="stat-value" id="sdef-value">999</span>
+                    <span class="stat-value" id="spd-value">999</span>
                 </div>
                 <div class="stat-bars">
                     <div class="exterior-bar">
@@ -117,6 +117,6 @@
     </main>
     <footer class="footer-container">
     </footer>
-    <script rel="type/javascript" src="./../features/populate-stats/populate-stats.js"></script>
+    <script  type="text/javascript" src="/src/features/populate-stats/populate-stats.js"></script>
 </body>
 </html>

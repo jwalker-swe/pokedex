@@ -73,16 +73,51 @@ gallery.addEventListener('click', async function(event) {
     await getStats.getData(buttonPressed);
     let results = await getStats._results;
 
-    await localStorage.setItem('pokemonName', results.name);
-    await localStorage.setItem('pokemonId', results.id);
-    await localStorage.setItem('pokemonAbilities', results.abilities);
-    await localStorage.setItem('pokemonWeight', results.weight);
-    await localStorage.setItem('pokemonHeight', results.height);
-    await localStorage.setItem('pokemonStats', results.stats);
-    await localStorage.setItem('pokemonTypes', results.types);
+    let name = results.name;
+    let id = results.id;
+    let types = results.types;
+    let weight = results.weight;
+    let height = results.height;
+    let abilities = results.abilities;
+    let sound = results.cries.legacy;
+    let hp = results.stats[0].base_stat;
+    let atk = results.stats[1].base_stat;
+    let def = results.stats[2].base_stat;
+    let satk = results.stats[3].base_stat; 
+    let sdef = results.stats[4].base_stat;
+    let spd = results.stats[5].base_stat;
+
+    if (results.types.length > 1) {
+        types = [results.types[0].type.name.toString(), results.types[1].type.name.toString()];
+    } else {
+        types = [results.types[0].type.name.toString()];
+    }
+
+    if (results.abilities.length > 1) {
+        abilities = [results.abilities[0].ability.name.toString(), results.abilities[1].ability.name.toString()];
+    } else {
+        abilities = [results.abilities[0].ability.name.toString()];
+    }
+
+    let typesObj = JSON.stringify(types);
+    let abilitiesObj = JSON.stringify(abilities);
+
+    await localStorage.setItem('pokemonName', name);
+    await localStorage.setItem('pokemonId', id);
+    await localStorage.setItem('pokemonTypes', typesObj);
+    await localStorage.setItem('pokemonWeight', weight);
+    await localStorage.setItem('pokemonHeight', height);
+    await localStorage.setItem('pokemonAbilities', abilitiesObj);
+    await localStorage.setItem('pokemonSound', sound);
+    await localStorage.setItem('pokemonHp', hp);
+    await localStorage.setItem('pokemonAtk', atk);
+    await localStorage.setItem('pokemonDef', def);
+    await localStorage.setItem('pokemonSatk', satk);
+    await localStorage.setItem('pokemonSdef', sdef);
+    await localStorage.setItem('pokemonSpd', spd);
 
     setTimeout(() => {
-        window.location.href='./src/pages/poke-stats.html';
+        window.location.href = `/src/pages/poke-stats`;
     }, 10);
 
     return pokemon;

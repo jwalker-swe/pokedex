@@ -73,7 +73,13 @@ class Pokedex{
         await this.fetchData(offset, idArray);
 
         this._results.forEach(async pokemon => {
-            listOfNames.push(pokemon.name);
+            let origName = pokemon.name.split('');
+            let firstLetter = origName[0].toUpperCase();
+            origName.shift();
+            origName.unshift(firstLetter);
+            let newName = origName.join('');
+            
+            listOfNames.push(newName);
         })
 
         this._results.forEach(async pokemon => {
@@ -107,10 +113,6 @@ class Pokedex{
 
 
         for (const [index, id] of this._listOfIds.entries()) {
-            // let pokemonLink = document.createElement('a');
-            // pokemonLink.classList.add('link-to-stats');
-            // pokemonLink.href = '/src/pages/poke-stats.html';
-            // gallery.appendChild(pokemonLink);
 
             let pokemonButton = document.createElement('button');
             pokemonButton.classList.add('pokemonButton');
@@ -148,7 +150,7 @@ class Pokedex{
             backgroundGrid.appendChild(thumbnail);
 
             let img = document.createElement('img');
-            img.src = `src/assets/imgs/sprites/generation-3/pokemon/main-sprites/emerald/${id}.png`;
+            img.src = `/assets/imgs/sprites/generation-3/pokemon/main-sprites/emerald/${id}.png`;
             thumbnail.appendChild(img);
             
             let nameContainer = document.createElement('div');
