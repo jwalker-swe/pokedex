@@ -14,6 +14,11 @@ app.get('/', (request, response) => {
     response.sendFile(__dirname + '/index.html');
 })
 
+app.get('/src/pages/poke-list', (request, response) => {
+    response.set('Content-type', 'text/html');
+    response.sendFile(__dirname + '/src/pages/poke-list.html');
+})
+
 app.get('/src/css/index.css', (request, response) => {
     response.set('Content-type', 'text/css');
     response.sendFile(__dirname + '/src/css/index.css');

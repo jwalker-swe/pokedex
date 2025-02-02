@@ -1,8 +1,15 @@
+
+
 let currentPage;
 let loadCount;
 
+// localStorage.clear();
+
 const setPage = function() {
-    currentPage = 1;
+    currentPage = localStorage.getItem('currentPage');
+    if (!currentPage) {
+        currentPage = 1;
+    }
     loadCount++;
     return currentPage;
 }
@@ -47,24 +54,23 @@ class CreatePageNumbers{
         });
     }
 
-    initialPages() {
-        this.pushToIterators();
-        this._currentIterator = 0;
+    // initialPages() {
+    //     this.pushToIterators();
+    //     this._currentIterator = 0;
 
-        this._listOfIterators[this._currentIterator].forEach(iteratorPage => {
-            iteratorPage.forEach(page => {
-                let pageNum = document.createElement('li');
-                pageNum.classList.add('page-number');
-                pageNum.id = `${page}`;
-                pageNum.innerHTML = `${page}`;
-                if (currentPage.toString() != page.toString()) {
-                    pageNum.style.opacity = '0.5';
-                }
-                pageNumberList.appendChild(pageNum);
-
-            })
-        })
-    }
+    //     this._listOfIterators[this._currentPage].forEach(iteratorPage => {
+    //         iteratorPage.forEach(page => {
+    //             let pageNum = document.createElement('li');
+    //             pageNum.classList.add('page-number');
+    //             pageNum.id = `${page}`;
+    //             pageNum.innerHTML = `${page}`;
+    //             if (currentPage.toString() != page.toString()) {
+    //                 pageNum.style.opacity = '0.5';
+    //             }
+    //             pageNumberList.appendChild(pageNum);
+    //         })
+    //     })
+    // }
 
     genPages() {
         //Reset list of iterators
@@ -79,6 +85,7 @@ class CreatePageNumbers{
                         // Need to get pages from iterator
                         let pageList = page;
                         pageList.forEach(num => {
+                            console.log(num);
                             let pageNum = document.createElement('li');
                             pageNum.classList.add('page-number');
                             pageNum.id = `${num}`;
@@ -147,13 +154,18 @@ class CreatePageNumbers{
 
 
 // Load initial pages
-const generatePageNumbers = new CreatePageNumbers(386, 1);
+const generatePageNumbers = new CreatePageNumbers(386, currentPage);
 
 const initialLoad = function() {
-    prevPageArrow.style.display = 'none';
+    if (currentPage === 1) {
+        prevPageArrow.style.display = 'none';
+    }
     generatePageNumbers.genPages();
 }
-window.addEventListener('load', initialLoad);
+
+window.addEventListener('load', () => {
+        initialLoad();
+});
 
 
 
@@ -168,7 +180,7 @@ function throttle(func, limit) {
             inThrottle = true;
             setTimeout(() => inThrottle = false, limit);
         }
-    }
+    } 
 }
 
 
@@ -176,6 +188,7 @@ function throttle(func, limit) {
 // Go to next page
 const genNextPage = function() {
     generatePageNumbers.nextPage();
+    localStorage.setItem('currentPage', currentPage);
 }
 nextPageButton.addEventListener('click', throttle(genNextPage, 800));
 
@@ -184,6 +197,7 @@ nextPageButton.addEventListener('click', throttle(genNextPage, 800));
 // Go to prev page
 const genPrevPage = function() {
     generatePageNumbers.prevPage();
+    localStorage.setItem('currentPage', currentPage);
 }
 prevPageButton.addEventListener('click', throttle(genPrevPage, 800));
 

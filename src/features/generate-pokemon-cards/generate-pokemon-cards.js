@@ -3,6 +3,8 @@ let container = document.querySelector('.gallery-contaienr')
 let gallery = document.querySelector('.gallery')
 let activePage = document.querySelector('.current-page');
 
+let initialLoadScript = document.querySelector('#initial-load-script');
+
 let wrapper = document.querySelector('.gallery');
 
 // Create array of pokemon to fetch
@@ -186,7 +188,8 @@ pokedex.createCards(1, allIds);
 
 let nextPage = async function () {
 
-    pokedex.removeCards(currentPage);
+    pokedex.removeCards();
+    initialLoadScript.remove();
     pokedex = await new Pokedex(currentPage);
     await pokedex.createCards(1, allIds);
 
@@ -194,7 +197,8 @@ let nextPage = async function () {
 
 let prevPage = async function () {
 
-    pokedex.removeCards(currentPage);
+    pokedex.removeCards();
+    initialLoadScript.remove();
     pokedex = await new Pokedex(currentPage);
     await pokedex.createCards(1, allIds);
 

@@ -122,3 +122,4 @@ gallery.addEventListener('click', async function(event) {
 
     return pokemon;
 })
+

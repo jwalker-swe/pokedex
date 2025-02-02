@@ -120,7 +120,10 @@ class PopulateGallery {
 let generateCards = new PopulateGallery(12);
 let currentPage = 1;
 
+localStorage.setItem('currentPage', currentPage);
+
 document.querySelector('.bi-arrow-left').style.opacity = '0';
+
 generateCards.createCards();
 
 

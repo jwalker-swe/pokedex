@@ -7,7 +7,8 @@ let types = localStorage.getItem('pokemonTypes');
 let typesParsed = JSON.parse(types);
 let weight = localStorage.getItem('pokemonWeight');
 let height = localStorage.getItem('pokemonHeight');
-let moves = localStorage.getItem('pokemonAbilities');
+let moves = localStorage.getItem('pokemonAbilities'); 
+let newMove = [];
 let movesParsed = JSON.parse(moves);
 let sound = localStorage.getItem('pokemonSound');
 let hp = localStorage.getItem('pokemonHp');
@@ -16,6 +17,29 @@ let def = localStorage.getItem('pokemonDef');
 let satk = localStorage.getItem('pokemonSatk');
 let sdef = localStorage.getItem('pokemonSdef');
 let spd = localStorage.getItem('pokemonSpd');
+
+// Adjust moves values
+let movesSpelling = function() {
+    movesParsed.forEach(move => {
+        let chars = move.split('');
+        let firstLetter = chars.shift();
+        firstLetter = firstLetter.toUpperCase();
+        chars.unshift(firstLetter);
+
+        for (let i = 0; i < chars.length; i++) {
+
+            if (chars[i] === '-') {
+                let char = chars[i+1];
+                let charUpper = char.toUpperCase();
+                chars[i+1] = charUpper;
+            }
+        }
+        newMove.push(chars.join(''));
+        console.log(newMove);
+    });
+}
+
+movesSpelling();
 
 
 // Get html elements
@@ -45,12 +69,9 @@ let mainContainer = document.querySelector('.main-container');
 let getImage = async function() {
     try {
         let imgId = await id.toString() + '.png';
-        console.log(imgId)
-        console.log(id);
         const response = await fetch(`/src/pages/poke-stats/${id}`)
         const data = await response.json();
         thumbnail.src = data.path;
-        console.log(data.path);
     } catch (err) {
         console.log(`Couldn't retrieve img: ${err}`);
     }
@@ -63,7 +84,7 @@ mainContainer.style.backgroundColor = `var(--${typesParsed[0].toLowerCase()})`
 
 nameContainer.innerHTML = `${nameValue.toUpperCase()}`
 
-weightContainer.innerHTML = `${Number(weight) * 0.1}` + 'kg';
+weightContainer.innerHTML = `${(Number(weight) * 0.1).toFixed(1)}` + 'kg';
 heightContainer.innerHTML = `${(Number(height) * 0.1).toFixed(1)}` + 'm';
 
 hpBar.style.width = `clamp(0%, ${hp}%, 100%)`;
@@ -100,3 +121,12 @@ if (typesParsed.length === 1) {
     type002.innerHTML = `${typesParsed[1].toUpperCase()}`
 }
 
+if (movesParsed.length === 1) {
+    move001.innerHTML = `${newMove[0]}`;
+    moove002.temove();
+} else {
+    move001.innerHTML = `${newMove[0]}`;
+    move002.innerHTML = `${newMove[1]}`
+}
+
+let currentPage = localStorage.getItem('currentPage');
