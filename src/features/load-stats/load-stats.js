@@ -45,7 +45,6 @@ let Stats = class {
             const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${this._id}`);
             const data = await response.json();
             this._results = await data;
-            // console.log(this._results);
         } catch (err) {
             console.log('Error: ', err);
         }

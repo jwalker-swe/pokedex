@@ -1,7 +1,6 @@
 
 
 let currentPage;
-let loadCount;
 
 // localStorage.clear();
 
@@ -10,14 +9,12 @@ const setPage = function() {
     if (!currentPage) {
         currentPage = 1;
     }
-    loadCount++;
     return currentPage;
 }
 
+
 setPage();
 
-
-console.log(currentPage);
 
 const totalPokemon = 386;
 const maxPerPage = 12;
@@ -54,24 +51,6 @@ class CreatePageNumbers{
         });
     }
 
-    // initialPages() {
-    //     this.pushToIterators();
-    //     this._currentIterator = 0;
-
-    //     this._listOfIterators[this._currentPage].forEach(iteratorPage => {
-    //         iteratorPage.forEach(page => {
-    //             let pageNum = document.createElement('li');
-    //             pageNum.classList.add('page-number');
-    //             pageNum.id = `${page}`;
-    //             pageNum.innerHTML = `${page}`;
-    //             if (currentPage.toString() != page.toString()) {
-    //                 pageNum.style.opacity = '0.5';
-    //             }
-    //             pageNumberList.appendChild(pageNum);
-    //         })
-    //     })
-    // }
-
     genPages() {
         //Reset list of iterators
         this._listOfIterators = [[],[],[],[],[],[],[],[],[],[],[]];
@@ -85,7 +64,6 @@ class CreatePageNumbers{
                         // Need to get pages from iterator
                         let pageList = page;
                         pageList.forEach(num => {
-                            console.log(num);
                             let pageNum = document.createElement('li');
                             pageNum.classList.add('page-number');
                             pageNum.id = `${num}`;
@@ -157,6 +135,7 @@ class CreatePageNumbers{
 const generatePageNumbers = new CreatePageNumbers(386, currentPage);
 
 const initialLoad = function() {
+    currentPage = Number(currentPage);
     if (currentPage === 1) {
         prevPageArrow.style.display = 'none';
     }
@@ -164,7 +143,7 @@ const initialLoad = function() {
 }
 
 window.addEventListener('load', () => {
-        initialLoad();
+    initialLoad();
 });
 
 
@@ -200,6 +179,3 @@ const genPrevPage = function() {
     localStorage.setItem('currentPage', currentPage);
 }
 prevPageButton.addEventListener('click', throttle(genPrevPage, 800));
-
-
-
