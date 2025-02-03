@@ -2,6 +2,7 @@
 let container = document.querySelector('.gallery-contaienr')
 let gallery = document.querySelector('.gallery')
 let activePage = document.querySelector('.current-page');
+let footerNav = document.querySelector('.footer-nav');
 
 let initialLoadScript = document.querySelector('#initial-load-script');
 
@@ -220,3 +221,15 @@ function throttle(func, limit) {
 
 nextPageButton.addEventListener('click', throttle(nextPage, 800));
 prevPageButton.addEventListener('click', throttle(prevPage, 800));
+
+homeButton.addEventListener('click', async () => {
+    currentPage = await 1;
+    generatePageNumbers._currentPage = await currentPage;
+    await localStorage.setItem('currentPage', currentPage);
+
+    await pokedex.removeCards();
+    pokedex = await new Pokedex(currentPage);
+    await pokedex.createCards(1, allIds);
+
+    footerNav.style.display = 'flex';
+})

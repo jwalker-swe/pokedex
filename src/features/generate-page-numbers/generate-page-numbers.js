@@ -1,8 +1,10 @@
-
+let homeButton = document.querySelector('.home-button');
 
 let currentPage;
 
-// localStorage.clear();
+
+
+
 
 const setPage = function() {
     currentPage = localStorage.getItem('currentPage');
@@ -179,3 +181,15 @@ const genPrevPage = function() {
     localStorage.setItem('currentPage', currentPage);
 }
 prevPageButton.addEventListener('click', throttle(genPrevPage, 800));
+
+
+homeButton.addEventListener('click', async () => {
+    currentPage = await 1;
+    generatePageNumbers._currentPage = await currentPage;
+    await localStorage.setItem('currentPage', currentPage);
+
+    await generatePageNumbers.removePages();
+    await initialLoad();
+
+    console.log('working');
+}) 

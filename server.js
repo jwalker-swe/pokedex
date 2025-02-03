@@ -2,12 +2,15 @@
 const express = require('express');
 const app = express();
 const PORT = 8000;
+const cors = require('cors');
+
 let id;
 
 const js = '/src/features/';
 
 app.set("view engin", "ejs");
 app.use(express.static('public'));
+app.use(cors());
 
 app.get('/', (request, response) => {
     response.set('Content-Type', 'text/html');
@@ -42,6 +45,11 @@ app.get('/src/features/generate-pokemon-cards/generate-pokemon-cards.js', (reque
 app.get('/src/features/load-stats/load-stats.js', (request, response) => {
     response.set('Content-type', 'text/javascript');
     response.sendFile(__dirname + '/src/features/load-stats/load-stats.js');
+})
+
+app.get('/src/features/search/search.js', (request, response) => {
+    response.set('Content-type', 'text/javascript');
+    response.sendFile(__dirname + '/src/features/search/search.js');
 })
 
 // app.get(`/src/pages/poke-stats/:pokemonId`, (request, response) => {

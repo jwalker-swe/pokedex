@@ -90,6 +90,14 @@ body {
     margin: 0px auto;
 }
 
+.home-button {
+    display: flex;
+}
+
+.home-button:hover {
+    cursor: pointer;
+}
+
 .logo-container {
     width: 250px;
     height: 32px;
