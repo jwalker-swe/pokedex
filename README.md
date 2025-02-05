@@ -1,6 +1,6 @@
 # PokéOrigins: Pokédex
 
-Welcome to **PokéOrigins: Pokédex**, a web application that allows users to explore the world of Pokémon in an interactive and informative way. This app pulls data from the [PokéAPI](https://pokeapi.co/) and provides an easy-to-use interface for users to search and view detailed information about their favorite Pokémon.
+Welcome to **PokéOrigins: Pokédex**, a web application that allows users to explore the world of Pokémon (Up to Gen 3) in an interactive and informative way. This app pulls data from the [PokéAPI](https://pokeapi.co/) and provides an easy-to-use interface for users to search and view detailed information about their favorite Pokémon.
 
 ## Features
 
@@ -20,7 +20,8 @@ Welcome to **PokéOrigins: Pokédex**, a web application that allows users to ex
 
 ## Live Demo
 
-You can check out the live version of the PokéOrigins app [here](https://prism-pokedex.onrender.com/). Note: This can take several seconds while the server boots up.
+You can check out the live version of the PokéOrigins app [here](https://prism-pokedex.onrender.com/). 
+Note: This can take several seconds while the server boots up.
 
 ## Installation
 
