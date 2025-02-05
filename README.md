@@ -54,6 +54,12 @@ To get started with PokéOrigins, follow these steps:
 
 ## Screenshots
 
+![Home Page](/src/assets/imgs/readme-imgs/home-page.jpg)
+![Stat Card 001](/src/assets/imgs/readme-imgs/stats-001.jpg)
+![Stat Card 002](/src/assets/imgs/readme-imgs/stats-002.jpg)
+![Stat Card 003](/src/assets/imgs/readme-imgs/stats-003.jpg)
+![Search By Name](/src/assets/imgs/readme-imgs/search-name.jpg)
+![Search By Id](/src/assets/imgs/readme-imgs/search-id.jpg)
 
 ## License
 
