@@ -1,0 +1,46 @@
+# PokéOrigins: Pokédex
+
+Welcome to **PokéOrigins: Pokédex**, a web application that allows users to explore the world of Pokémon in an interactive and informative way. This app pulls data from the [PokéAPI](https://pokeapi.co/) and provides an easy-to-use interface for users to search and view detailed information about their favorite Pokémon.
+
+## Features
+
+- **Pokémon Search**: Easily search for any Pokémon by name or ID.
+- **Detailed Information**: View detailed stats, abilities, moves, and other attributes of each Pokémon.
+- **Pagination**: Browse through different pages of Pokémon with smooth navigation.
+- **Responsive Design**: Fully responsive and mobile-friendly layout for an optimized user experience on any device.
+
+## Technologies Used
+
+- **HTML5**: Markup language for the structure of the web pages.
+- **CSS3**: Styling and layout of the application.
+- **JavaScript**: Client-side scripting for interactivity.
+- **Node.js**: JavaScript runtime used to run the server.
+- **Express**: Web framework for building the server and handling requests.
+- **PokéAPI**: A free and open API to retrieve Pokémon data.
+
+## Live Demo
+
+You can check out the live version of the PokéOrigins app [here](https://prism-pokedex.onrender.com/).
+
+## Installation
+
+To get started with PokéOrigins, follow these steps:
+
+1. Clone the repository to your local machine:
+
+   ```bash
+   git clone https://github.com/PRISM-EXE/pokedex.git
+   
+2. Navigate to the project directory:
+   ```bash
+   cd pokedex
+
+3. Install the require dependencies:
+   ```bash
+   npm install
+
+4. Start the Node.js server:
+   ```bash
+   npm start
+
+5. Open your browser and navigate to http://localhost:8000 to access the app
