@@ -44,3 +44,21 @@ To get started with PokéOrigins, follow these steps:
    npm start
 
 5. Open your browser and navigate to http://localhost:8000 to access the app
+
+## How It Works
+
+1. The app uses the PokéAPI to fetch data for all available Pokémon.
+2. Users can search for a Pokémon by typing the name or id in the search bar.
+3. On selection, detailed information about the Pokémon is displayed, including stats, abilities, and moves.
+4. Pagination allows users to browse through the Pokémon in an orderly fashion.
+
+## Screenshots
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+- PokéAPI for providing the Pokémon data.
+- Render for hosting the project.
+- Express for the web framework used to build the server
