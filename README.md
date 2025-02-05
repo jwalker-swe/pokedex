@@ -54,11 +54,12 @@ To get started with PokéOrigins, follow these steps:
 
 ## Screenshots
 
+
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Acknowledgments
-- PokéAPI for providing the Pokémon data.
-- Render for hosting the project.
-- Express for the web framework used to build the server
+- [PokéAPI](https://pokeapi.co/) for providing the Pokémon data.
+- [Render](https://render.com/) for hosting the project.
+- [Express](https://expressjs.com/) for the web framework used to build the server
