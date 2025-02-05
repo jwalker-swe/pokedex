@@ -20,7 +20,7 @@ Welcome to **PokéOrigins: Pokédex**, a web application that allows users to ex
 
 ## Live Demo
 
-You can check out the live version of the PokéOrigins app [here](https://prism-pokedex.onrender.com/).
+You can check out the live version of the PokéOrigins app [here](https://prism-pokedex.onrender.com/). Note: This can take several seconds while the server boots up.
 
 ## Installation
 
