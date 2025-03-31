@@ -30,7 +30,7 @@ To get started with PokéOrigins, follow these steps:
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/PRISM-EXE/pokedex.git
+   git clone https://github.com/jwalker-swe/pokedex.git
    
 2. Navigate to the project directory:
    ```bash
