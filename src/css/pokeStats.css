@@ -177,7 +177,7 @@ body {
 }
 
 .pokemon-img-container {
-    width: 150px;
+    /* width: 150px; */
     height:150px;
 
     grid-column-start: 1;
@@ -191,6 +191,10 @@ body {
 
     z-index: 1000;
 }
+
+/* .pokemon-img-container {
+
+} */
 
 .pokemon-name-container {
     margin-left: 220px;
